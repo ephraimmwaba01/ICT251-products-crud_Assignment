@@ -1,0 +1,39 @@
+{
+  "info": {
+    "name": "ICT251 Products API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [{ "key": "baseUrl", "value": "http://localhost:3000" }],
+  "item": [
+    {
+      "name": "1. GET all products",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/products" }
+    },
+    {
+      "name": "2. GET one product",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/products/1" }
+    },
+    {
+      "name": "3. POST create product",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"product_name\": \"Test Phone\",\n  \"brand\": \"Acme\",\n  \"category\": \"Smartphones\",\n  \"price\": 199.99,\n  \"stock_quantity\": 5,\n  \"description\": \"Demo product created from Postman\"\n}" },
+        "url": "{{baseUrl}}/api/products"
+      }
+    },
+    {
+      "name": "4. PUT update product (change id to the new one)",
+      "request": {
+        "method": "PUT",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"product_name\": \"Test Phone Pro\",\n  \"brand\": \"Acme\",\n  \"category\": \"Smartphones\",\n  \"price\": 249.99,\n  \"stock_quantity\": 12,\n  \"description\": \"Updated from Postman\"\n}" },
+        "url": "{{baseUrl}}/api/products/11"
+      }
+    },
+    {
+      "name": "5. DELETE product (change id to the new one)",
+      "request": { "method": "DELETE", "url": "{{baseUrl}}/api/products/11" }
+    }
+  ]
+}

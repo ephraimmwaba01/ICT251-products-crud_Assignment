@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tech Product Showcase</title>
+  <style>
+    :root {
+      --ink: #1b2430;
+      --muted: #5f6b7a;
+      --paper: #f6f7f9;
+      --card: #ffffff;
+      --line: #d9dee5;
+      --accent: #0b6e6e;
+      --accent-dark: #084f4f;
+      --danger: #b3261e;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Segoe UI", system-ui, sans-serif; background: var(--paper); color: var(--ink); line-height: 1.5; }
+    header { padding: 28px 24px 8px; max-width: 1100px; margin: 0 auto; }
+    h1 { margin: 0; font-size: 1.8rem; letter-spacing: -0.01em; }
+    header p { margin: 4px 0 0; color: var(--muted); }
+    main { max-width: 1100px; margin: 0 auto; padding: 16px 24px 48px; display: grid; gap: 24px; }
+    section { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; }
+    h2 { margin: 0 0 14px; font-size: 1.1rem; }
+    form { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+    label { display: grid; gap: 4px; font-size: 0.9rem; font-weight: 600; }
+    input, textarea { font: inherit; padding: 8px 10px; border: 1px solid var(--line); border-radius: 6px; background: #fff; color: var(--ink); }
+    input:focus-visible, textarea:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .wide { grid-column: 1 / -1; }
+    .actions { grid-column: 1 / -1; display: flex; gap: 10px; flex-wrap: wrap; }
+    button { font: inherit; font-weight: 600; padding: 8px 16px; border-radius: 6px; border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer; }
+    button:hover { background: var(--accent-dark); }
+    button.secondary { background: #fff; color: var(--accent); }
+    button.secondary:hover { background: #eaf4f4; }
+    button.danger { background: #fff; color: var(--danger); border-color: var(--danger); }
+    button.danger:hover { background: #fdecea; }
+    #message { min-height: 1.4em; margin: 0 0 10px; font-weight: 600; }
+    #message.error { color: var(--danger); }
+    #message.ok { color: var(--accent-dark); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+    th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; white-space: nowrap; }
+    td.num { text-align: right; white-space: nowrap; }
+    td.row-actions { white-space: nowrap; display: flex; gap: 6px; }
+    td.row-actions button { padding: 4px 10px; font-size: 0.85rem; }
+    .empty { color: var(--muted); padding: 16px 0 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Tech Product Showcase</h1>
+    <p>Add, edit and remove products in the catalogue.</p>
+  </header>
+
+  <main>
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Add a product</h2>
+      <p id="message" role="status"></p>
+      <form id="product-form">
+        <input type="hidden" id="product-id">
+        <label>Product name
+          <input id="product_name" required maxlength="150">
+        </label>
+        <label>Brand
+          <input id="brand" maxlength="80">
+        </label>
+        <label>Category
+          <input id="category" maxlength="80" placeholder="e.g. Laptops">
+        </label>
+        <label>Price (USD)
+          <input id="price" type="number" min="0" step="0.01" required>
+        </label>
+        <label>Stock quantity
+          <input id="stock_quantity" type="number" min="0" step="1" required>
+        </label>
+        <label class="wide">Description
+          <textarea id="description" rows="2"></textarea>
+        </label>
+        <div class="actions">
+          <button type="submit" id="save-btn">Add product</button>
+          <button type="button" id="cancel-btn" class="secondary" hidden>Cancel edit</button>
+        </div>
+      </form>
+    </section>
+
+    <section aria-labelledby="list-title">
+      <h2 id="list-title">Products</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th><th>Name</th><th>Brand</th><th>Category</th>
+              <th>Price</th><th>Stock</th><th>Description</th><th>Updated</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody id="product-rows"></tbody>
+        </table>
+      </div>
+      <p id="empty" class="empty" hidden>No products yet. Add one above.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
